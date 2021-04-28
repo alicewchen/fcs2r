@@ -1,20 +1,24 @@
-#Open packages
+#------------------------------
+#  Extract mean FL2 from fcs
+#------------------------------
 #' @name fcs_to_cell_density
+#' @aliases fcs_to_cell_density
+#' @title Export cell density from multiple \code{.fcs} files
+#' @description This function calculates the cell density of each \code{.fcs} file within a folder and returns all the values as a dataframe.
+#' \eqn{Cell density (cells per uL) = the total events recorded/the total sample volume}.
+#' @template input-arg
+#' @template common-note
+#' @return Returns a dataframe with the 3 columns: \code{Well_id}, \code{cell density},\code{Plate}
 #' @import flowCore
 #' @import utils
-#' @export fcs_to_cell_density
-####Input:
-#1. Folder containing only .fcs files you need
-    #.fcs files must have file names in the following format:
-    #      Plate number(##)-Well-Well position([A-Z]##)..\.fcs
-        #Example 1: 01-Well-A1.fcs
-        #Example 2: 01-Well-A1_Live alga.fcs
-#2. Full folder path containing .fcs files
-#3. Full output file path including .txt file name
+#' @examples
+#' library(fcs2r)
+#' wd<- getwd()
+#' fcs_folder <- paste(system.file(package = "fcs2r"),"/extdata/fcs_data/", sep ="")
+#' df <- fcs_to_cell_density(fcs_folder) #save output as dataframe
+#' fcs_to_cell_density(fcs_folder, "test.txt") #export as text file
 
-####Output (.txt, tab-delimited)
-#Well_id, Cell_density, plate
-
+#' @export
 fcs_to_cell_density<-function(folder_path_containing_fcs, output_filepath=NULL){
 
   currentwd<-getwd()
@@ -43,10 +47,8 @@ fcs_to_cell_density<-function(folder_path_containing_fcs, output_filepath=NULL){
   }
 
   setwd(currentwd)
-  if (is.null(output_filepath) == FALSE){
-    utils::write.table(out.file, output_filepath, quote=FALSE, sep="\t")
-  }
-
+  if (missing(output_filepath)==FALSE) {
+    utils::write.table(out.file, output_filepath, quote=FALSE, sep="\t")}
   return(out.file)
 }
 

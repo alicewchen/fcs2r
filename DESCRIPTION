@@ -1,0 +1,12 @@
+Package: fcs2r
+Type: Package
+Title: Export .fcs data to R dataframes
+Version: 1.0.0
+Author: Wen Chen
+Maintainer: Wen Chen <w.chen.alice@gmail.com>
+Description: This packages extracts .fcs data and saves it as R dataframes.
+License: GPL-3
+Imports: flowCore, utils
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
